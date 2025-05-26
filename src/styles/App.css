@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+#root {
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    --primary-color: #e50914;
+    --primary-color-rgb: 299, 9, 20;
+    --hover-color: #b40710;
+    --border-radius: 7px;
+}
+
+/* Universal styling */
+.container {
+    min-height: 100vh;
+    background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.7) 50%,
+            rgba(0, 0, 0, 0.4) 100%
+        ),
+        url("../assets/hero-full.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.accent {
+    color: var(--primary-color);
+}
