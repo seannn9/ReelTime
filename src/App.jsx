@@ -4,6 +4,7 @@ import Welcome from "./pages/Welcome";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ReserveSeat from "./pages/ReserveSeat";
+import NotFound from "./pages/NotFound";
 
 export default function App() {
     return (
@@ -20,6 +21,7 @@ export default function App() {
                     path="/selected-movie/:movie_id"
                     element={<ReserveSeat />}
                 />
+                <Route path="*" element={<NotFound />}></Route>
             </Routes>
         </div>
     );
