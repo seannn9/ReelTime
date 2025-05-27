@@ -4,7 +4,7 @@ import Welcome from "./pages/Welcome";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ReserveSeat from "./pages/ReserveSeat";
-import NotFound from "./pages/NotFound";
+import NotFound from "./pages/404";
 
 export default function App() {
     return (
