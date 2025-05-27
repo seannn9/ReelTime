@@ -9,6 +9,7 @@
 
 .movie-card:hover {
     transform: translateY(-10px);
+    box-shadow: rgba(var(--primary-color-rgb)) 0px 7px 29px 0px;
 }
 
 .movie-poster {
