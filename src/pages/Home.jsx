@@ -42,6 +42,7 @@ export default function Home() {
                             style={{
                                 height: "375px",
                                 width: "250px",
+                                justifySelf: "center",
                             }}
                         />
                     ))
