@@ -1,24 +1,26 @@
 .login-container {
     display: flex;
-    height: calc(100vh - 200px);
-    overflow: hidden;
+    min-height: 80vh;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    padding: 2rem;
+    width: 100%;
 }
 
 .login-section {
     display: flex;
-    width: 550px;
+    width: 100%;
+    max-width: 550px;
     min-width: 320px;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    /* background-color: #242424; */
     background-color: rgba(26, 26, 26, 0.8);
-    height: 520px;
-    margin: 0 1em;
+    padding: 3rem 2rem;
+    margin: 0 auto;
     border-radius: 20px;
+    height: auto;
 }
 
 .label h1 {
@@ -88,4 +90,14 @@ form button {
 form button:hover {
     background-color: var(--hover-color);
     border-color: var(--hover-color);
+}
+
+form p span {
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+form p span:hover {
+    color: var(--hover-color);
 }
