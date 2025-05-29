@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import ReserveSeat from "./pages/ReserveSeat";
 import NotFound from "./pages/404";
+import Login from "./pages/Login";
 
 export default function App() {
     return (
@@ -12,6 +13,7 @@ export default function App() {
             <Navbar />
             <Routes>
                 <Route path="/" element={<Welcome />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/now-showing-movies" element={<Home />} />
                 <Route
                     path="/selected-movie"
