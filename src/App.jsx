@@ -57,6 +57,7 @@ export default function App() {
         } else {
             setIsLoggedIn(false);
             setUsername("");
+            setAuthError("");
             navigate("/login");
         }
     };
