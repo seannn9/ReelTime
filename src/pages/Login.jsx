@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../styles/Login.css";
 import { Link } from "react-router-dom";
+import supabase from "../server/supabase-client.js";
 
 export default function Login() {
     const [username, setUsername] = useState("");
