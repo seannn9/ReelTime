@@ -49,6 +49,18 @@ export default function App() {
         }
     };
 
+    const handleRegister = async (email, password) => {
+        let { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
+
+        if (error) {
+            setAuthError(error.message);
+            return error.message;
+        }
+    };
+
     const handleLogout = async () => {
         let { error } = await supabase.auth.signOut();
 
@@ -80,6 +92,7 @@ export default function App() {
                             <Login
                                 username={username}
                                 onLogin={handleLogin}
+                                onRegister={handleRegister}
                                 authError={authError}
                             />
                         </ProtectedRoute>
