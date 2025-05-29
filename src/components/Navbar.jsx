@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/favicon32.png";
 import "../styles/components/Navbar.css";
 
 export default function Navbar({ username, isLoggedIn, onLogout }) {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { pathname } = location;
+
     return (
         <nav className="navbar">
             <div className="nav-logo">
@@ -15,13 +19,24 @@ export default function Navbar({ username, isLoggedIn, onLogout }) {
                 </Link>
             </div>
             <div className="nav-links">
-                {isLoggedIn && (
+                {isLoggedIn ? (
                     <div className="auth-links">
                         <p>{username}</p>
-                        <p onClick={onLogout} className="logout-btn">
+                        <p onClick={onLogout} className="auth-btn">
                             Logout
                         </p>
                     </div>
+                ) : (
+                    pathname !== "/login" && (
+                        <div className="auth-links">
+                            <p
+                                onClick={() => navigate("/login")}
+                                className="auth-btn"
+                            >
+                                Login
+                            </p>
+                        </div>
+                    )
                 )}
             </div>
         </nav>
