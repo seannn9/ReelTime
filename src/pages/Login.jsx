@@ -1,18 +1,18 @@
 import { useState } from "react";
 import "../styles/Login.css";
-import { Link } from "react-router-dom";
-import supabase from "../server/supabase-client.js";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
-    const [username, setUsername] = useState("");
+export default function Login({ onLogin, authError }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
-    const register = async () => {
-        let { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password,
-        });
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const error = await onLogin(email, password);
+        if (!error) {
+            navigate("/now-showing-movies");
+        }
     };
 
     return (
@@ -29,7 +29,7 @@ export default function Login() {
                         <p>Welcome user! Please enter your details.</p>
                     </div>
                 </div>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label htmlFor="email">Email</label>
                     <input
                         type="email"
@@ -46,9 +46,10 @@ export default function Login() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button type="submit" onClick={register}>
-                        Log In
-                    </button>
+                    {authError && (
+                        <p style={{ fontStyle: "italic" }}>{authError}</p>
+                    )}
+                    <button type="submit">Log In</button>
                     <p>
                         Don't have an account?{" "}
                         <span className="accent">Register for free!</span>
