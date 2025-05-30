@@ -25,6 +25,7 @@ export default function App() {
             if (error && error.message !== "Auth session missing!") {
                 setAuthError(error.message);
             } else {
+                setAuthError("");
                 setUsername(user.email);
                 setIsLoggedIn(true);
             }
@@ -43,6 +44,7 @@ export default function App() {
             setAuthError(error.message);
             return error.message;
         } else {
+            setAuthError("");
             setUsername(data.user.email);
             setIsLoggedIn(true);
             return null;
@@ -58,6 +60,8 @@ export default function App() {
         if (error) {
             setAuthError(error.message);
             return error.message;
+        } else {
+            setAuthError("");
         }
     };
 
@@ -73,6 +77,11 @@ export default function App() {
             navigate("/login");
         }
     };
+
+    const resetAuthError = () => {
+        setAuthError(null);
+    };
+
     return (
         <div className="container">
             <Navbar
@@ -94,6 +103,7 @@ export default function App() {
                                 onLogin={handleLogin}
                                 onRegister={handleRegister}
                                 authError={authError}
+                                resetAuthError={resetAuthError}
                             />
                         </ProtectedRoute>
                     }
