@@ -1,12 +1,19 @@
 import { useState } from "react";
 import "../styles/Login.css";
 import { Link, useNavigate } from "react-router-dom";
+import Modal from "../components/Modal";
 
-export default function Login({ onLogin, onRegister, authError }) {
+export default function Login({
+    onLogin,
+    onRegister,
+    authError,
+    resetAuthError,
+}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [authState, setAuthState] = useState("login");
+    const [showModal, setShowModal] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -19,8 +26,8 @@ export default function Login({ onLogin, onRegister, authError }) {
     const handleRegister = async (e) => {
         e.preventDefault();
         const error = await onRegister(email, password);
-        if (!error) {
-            setAuthState("login");
+        if (!error && !authError && email !== "" && password !== "") {
+            setShowModal(true);
         }
     };
 
@@ -46,7 +53,7 @@ export default function Login({ onLogin, onRegister, authError }) {
                             id="email"
                             placeholder="Enter your email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value.trim())}
                         />
                         <label htmlFor="password">Password</label>
                         <input
@@ -62,7 +69,12 @@ export default function Login({ onLogin, onRegister, authError }) {
                         <button type="submit">Log In</button>
                         <p>
                             Don't have an account?{" "}
-                            <span onClick={() => setAuthState("register")}>
+                            <span
+                                onClick={() => {
+                                    setAuthState("register");
+                                    resetAuthError();
+                                }}
+                            >
                                 Register for free!
                             </span>
                         </p>
@@ -76,24 +88,52 @@ export default function Login({ onLogin, onRegister, authError }) {
                                 id="email"
                                 placeholder="Enter your email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) =>
+                                    setEmail(e.target.value.trim())
+                                }
                             />
                             <label htmlFor="password">Password</label>
                             <input
                                 type="password"
                                 id="password"
                                 placeholder="Enter your password"
+                                value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                             />
+                            {authError && (
+                                <p style={{ fontStyle: "italic" }}>
+                                    {authError}
+                                </p>
+                            )}
                             <button type="submit">Register</button>
                             <p>
                                 Already have an account?{" "}
-                                <span onClick={() => setAuthState("login")}>
+                                <span
+                                    onClick={() => {
+                                        setAuthState("login");
+                                        resetAuthError();
+                                    }}
+                                >
                                     Login now!
                                 </span>
                             </p>
                         </form>
                     )
+                )}
+                {showModal && (
+                    <Modal
+                        action="Done"
+                        onSubmit={() => {
+                            setAuthState("login");
+                            setEmail("");
+                            setPassword("");
+                        }}
+                        closeModal={() => setShowModal(false)}
+                        headingMsg={"Confirm Your Email"}
+                        subHeadingMsg={
+                            "Check your email inbox and click the confirm button"
+                        }
+                    />
                 )}
             </section>
         </div>
