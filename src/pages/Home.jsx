@@ -35,7 +35,7 @@ export default function Home() {
             </h1>
             <div className="movies">
                 {isLoading ? (
-                    [...Array(5)].map((_, index) => (
+                    [...Array(10)].map((_, index) => (
                         <div
                             key={index}
                             className="loading-skeleton"
