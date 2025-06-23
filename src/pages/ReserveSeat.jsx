@@ -14,6 +14,7 @@ export default function ReserveSeat() {
     const [reservedSeats, setReservedSeats] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [isDisabled, setIsDisabled] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -32,6 +33,7 @@ export default function ReserveSeat() {
             } else {
                 setMovie(data[0]);
                 calculateShowingDates(data[0].showing_until);
+                setIsLoading(false);
             }
         };
 
@@ -59,7 +61,14 @@ export default function ReserveSeat() {
 
     return (
         <section className="movie-details-section">
-            {showingDates.length !== 0 ? (
+            {isLoading === true ? (
+                <div
+                    className="theater-details"
+                    style={{ justifyContent: "center", fontSize: "1.5rem" }}
+                >
+                    <h2>Loading...</h2>
+                </div>
+            ) : showingDates.length !== 0 ? (
                 <div className="theater-details">
                     <div className="theater-list-container">
                         <h2>Theater</h2>
